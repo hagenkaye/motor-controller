@@ -194,7 +194,7 @@ wait_rtc:
     sts     VREF_CTRLA,r_tmp
 
 ;; set up ADC
-    ldi     r_tmp,0x00                  ; accumulate 2 results
+    ldi     r_tmp,0x01                  ; accumulate 2 results
     sts     ADC0_CTRLB,r_tmp
     ldi     r_tmp,0b01010101            ; reduced capcitance, vdd reference, clock/64
     sts     ADC0_CTRLC,r_tmp
@@ -286,7 +286,7 @@ adc_result_ready:
     lds     r_tmp,ADC0_RESL             ; get result of ADC conversion
     lds     r_tmp_h,ADC0_RESH
 
-    subi    r_tmp_h,0x2                 ; normalize
+    subi    r_tmp_h,0x4                 ; normalize
     brmi    reverse_dir
 
     sts     TCD0_CMPASETL,r_tmp
